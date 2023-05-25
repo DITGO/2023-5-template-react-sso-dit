@@ -701,10 +701,19 @@ const Sistema: React.FC = () => {
         codigo: parseInt(localStorage.getItem("localId")!),
       });
     } else {
-      console.log(unidades[0]);
-      localStorage.setItem("localId", unidades[0].codigo!.toString());
-      localStorage.setItem("localNome", unidades[0].nome!);
-      setUnidade(unidades[0]);
+      console.log(unidadex);
+      if (unidadex !== undefined) {
+        localStorage.setItem("localId", unidadex!.id!.toString());
+        localStorage.setItem("localNome", unidadex!.nome!);
+        setUnidade({ codigo: unidadex!.id!, nome: unidadex!.nome! });
+      } else {
+        localStorage.setItem("localId", "0");
+        localStorage.setItem("localNome", "Clique aqui e selecione.");
+        /*setUnidade({
+          codigo: 0,
+          nome: "Clique aqui e selecione.",
+        });*/
+      }
     }
   };
 
