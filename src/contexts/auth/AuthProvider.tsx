@@ -1,12 +1,13 @@
-"use client";
-import { sistemaNameSSO } from "../../configs/sistemaConfig";
-import { urlsServices } from "../../configs/urlsConfig";
-import { useAxiosSSO } from "../../hooks/useAxiosSSO";
-import { UserType } from "../../types/UserType";
-import { getParameterUrl } from "../../utils/UtilsSistema";
-import { createContext, useContext, useState } from "react";
-import AuthUtils from "./AuthUtils";
-import { message } from "antd";
+'use client';
+import { sistemaNameSSO } from '../../configs/sistemaConfig';
+import { urlsServices } from '../../configs/urlsConfig';
+import { useAxiosSSO } from '../../hooks/useAxiosSSO';
+import { UserType } from '../../types/UserType';
+import { getParameterUrl } from '../../utils/UtilsSistema';
+
+import { createContext, useContext, useState } from 'react';
+import AuthUtils from './AuthUtils';
+import { message } from 'antd';
 
 export type AuthContextType = {
   user: UserType | null;
@@ -27,25 +28,25 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       .validaTokenSSO(token)
       .then((res: { data: any }) => {
         const userValidation = AuthUtils.prepareDataUser(res.data);
-        localStorage.setItem("token_sso", userValidation.token);
+        localStorage.setItem('token_sso', userValidation.token);
         setUser(userValidation);
         setValidado(true);
       })
       .catch((err: any) => {
         setUser(null);
         setValidado(false);
-        localStorage.removeItem("token_sso");
+        localStorage.removeItem('token_sso');
         message
           .error({
             content:
-              "Erro ao tentar validar seu token! Você será redirecionado.",
+              'Erro ao tentar validar seu token! Você será redirecionado.',
             duration: 5,
           })
           .then(() => {
             window.location.href = `${
               urlsServices.SSOWS
             }auth?response_type=token_only&client_id=${sistemaNameSSO}&redirect_uri=${encodeURIComponent(
-              window.location.href.replace("#", "|").split("/?access_token")[0]
+              window.location.href.replace('#', '|').split('/?access_token')[0],
             )}`;
           });
       });
@@ -59,21 +60,21 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     await apiAxios.logoutSSO().then((res: any) => {
       setUser(null);
       setValidado(false);
-      localStorage.removeItem("token_sso");
+      localStorage.removeItem('token_sso');
     });
   };
 
-  const tokenParam = getParameterUrl("access_token");
+  const tokenParam = getParameterUrl('access_token');
 
   if (
-    localStorage.getItem("token_sso") &&
-    localStorage.getItem("token_sso") !== "" &&
-    localStorage.getItem("token_sso") !== null &&
-    localStorage.getItem("token_sso") !== undefined
+    localStorage.getItem('token_sso') &&
+    localStorage.getItem('token_sso') !== '' &&
+    localStorage.getItem('token_sso') !== null &&
+    localStorage.getItem('token_sso') !== undefined
   ) {
-    if (user?.token !== localStorage.getItem("token_sso")!) {
+    if (user?.token !== localStorage.getItem('token_sso')!) {
       //validar
-      validaToken(localStorage.getItem("token_sso")!);
+      validaToken(localStorage.getItem('token_sso')!);
     }
   } else if (tokenParam) {
     //validar
@@ -82,7 +83,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     window.location.href = `${
       urlsServices.SSOWS
     }auth?response_type=token_only&client_id=${sistemaNameSSO}&redirect_uri=${encodeURIComponent(
-      window.location.href.replace("#", "|").split("/?access_token")[0]
+      window.location.href.replace('#', '|').split('/?access_token')[0],
     )}`;
   }
 

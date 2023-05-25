@@ -566,7 +566,7 @@ import {
   QuestionCircleFilled,
   EyeInvisibleOutlined,
   StarFilled,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 import {
   MenuProps,
   Breadcrumb,
@@ -585,30 +585,30 @@ import {
   List,
   Drawer,
   Divider,
-} from "antd";
-import React, { useEffect, useState } from "react";
-import Dashboard from "../dashboard";
-import Teste from "../teste";
-import { AuthProvider, useAuth } from "../../contexts/auth/AuthProvider";
+} from 'antd';
+import React, { useEffect, useState } from 'react';
+import Dashboard from '../dashboard';
+import Teste from '../teste';
+import { AuthProvider, useAuth } from '../../contexts/auth/AuthProvider';
 import {
   sistemaDescricao,
   sistemaNameSSO,
   sistemaVersao,
-} from "../../configs/sistemaConfig";
-import ptBR from "antd/lib/locale/pt_BR";
-import Title from "antd/es/typography/Title";
-import { menus } from "../../components/Menus";
-import { removeParameterUrl } from "../../utils/UtilsSistema";
+} from '../../configs/sistemaConfig';
+import ptBR from 'antd/lib/locale/pt_BR';
+import Title from 'antd/es/typography/Title';
+import { menus } from '../../components/Menus';
+import { removeParameterUrl } from '../../utils/UtilsSistema';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-type MenuItem = Required<MenuProps>["items"][number];
+type MenuItem = Required<MenuProps>['items'][number];
 
 function getItem(
   label: React.ReactNode,
   key: React.Key,
   icon?: React.ReactNode,
-  children?: MenuItem[]
+  children?: MenuItem[],
 ): MenuItem {
   return {
     key,
@@ -623,7 +623,7 @@ const Sistema: React.FC = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const [unidades, setUnidades] = useState([{ nome: "", codigo: 0 }]);
+  const [unidades, setUnidades] = useState([{ nome: '', codigo: 0 }]);
   const [openModalUnidade, setOpenModalUnidade] = useState(false);
   const [unidade, setUnidade] = useState<{
     nome: string;
@@ -631,7 +631,7 @@ const Sistema: React.FC = () => {
   } | null>(null);
   const [itemsMenu, setItemsMenu] = useState<MenuItem[]>([]);
   const [visibleSensive, setVisibleSensive] = useState(false);
-  const [chave, setChave] = useState("1");
+  const [chave, setChave] = useState('1');
   const rotas = (item: any) => {
     /*if (item.key === "1") {
       window.location.reload();
@@ -645,16 +645,16 @@ const Sistema: React.FC = () => {
   const MontaMenu = () => {
     const items: MenuItem[] = [];
     const rootMenu: string[] = [];
-    menus.map((menu) => {
+    menus.map(menu => {
       //loop para ver se o perfil do usuario tem permissão para o menu
       let autorizado = false;
-      if (auth?.user?.perfisSistemaAtual?.includes("ADM")) {
+      if (auth?.user?.perfisSistemaAtual?.includes('ADM')) {
         autorizado = true;
-      } else if (menu.perfis.includes("QUALQUER_PERFIL")) {
+      } else if (menu.perfis.includes('QUALQUER_PERFIL')) {
         autorizado = true;
       } else {
         auth?.user?.perfisSistemaAtual?.map((perfil: any) => {
-          menu.perfis.map((menuPerf) => {
+          menu.perfis.map(menuPerf => {
             if (perfil == menuPerf) {
               autorizado = true;
             }
@@ -692,22 +692,22 @@ const Sistema: React.FC = () => {
     setUnidades(unidadeN);
 
     if (
-      localStorage.getItem("localId") &&
-      localStorage.getItem("localId") !== "0" &&
-      localStorage.getItem("localId") !== ""
+      localStorage.getItem('localId') &&
+      localStorage.getItem('localId') !== '0' &&
+      localStorage.getItem('localId') !== ''
     ) {
       setUnidade({
-        nome: localStorage.getItem("localNome")!,
-        codigo: parseInt(localStorage.getItem("localId")!),
+        nome: localStorage.getItem('localNome')!,
+        codigo: parseInt(localStorage.getItem('localId')!),
       });
     } else {
       if (unidadex !== undefined) {
-        localStorage.setItem("localId", unidadex!.id!.toString());
-        localStorage.setItem("localNome", unidadex!.nome!);
+        localStorage.setItem('localId', unidadex!.id!.toString());
+        localStorage.setItem('localNome', unidadex!.nome!);
         setUnidade({ codigo: unidadex!.id!, nome: unidadex!.nome! });
       } else {
-        localStorage.setItem("localId", "0");
-        localStorage.setItem("localNome", "Clique aqui e selecione.");
+        localStorage.setItem('localId', '0');
+        localStorage.setItem('localNome', 'Clique aqui e selecione.');
         /*setUnidade({
           codigo: 0,
           nome: "Clique aqui e selecione.",
@@ -725,8 +725,8 @@ const Sistema: React.FC = () => {
   };
 
   const setUnidadeClick = (unidade: { nome: string; codigo: number }) => {
-    localStorage.setItem("localId", unidade.codigo.toString());
-    localStorage.setItem("localNome", unidade.nome);
+    localStorage.setItem('localId', unidade.codigo.toString());
+    localStorage.setItem('localNome', unidade.nome);
     setUnidade(unidade);
     setOpenModalUnidade(false);
     window.location.reload();
@@ -740,7 +740,7 @@ const Sistema: React.FC = () => {
     document.title = sistemaNameSSO;
     getUnidades();
     MontaMenu();
-    removeParameterUrl("access_token");
+    removeParameterUrl('access_token');
     //setMigalhas([{ title: window.location.pathname }]);
     /*if (window.location.pathname === "/") {
       navitate("/dashboard");
@@ -749,53 +749,53 @@ const Sistema: React.FC = () => {
 
   return (
     <ConfigProvider locale={ptBR}>
-      <Layout style={{ height: "100vh", width: "100vw" }}>
+      <Layout style={{ height: '100vh', width: '100vw' }}>
         <Sider
-          breakpoint='lg'
-          collapsedWidth='0'
-          onBreakpoint={(broken) => {
+          breakpoint="lg"
+          collapsedWidth="0"
+          onBreakpoint={broken => {
             console.log(broken);
           }}
           onCollapse={(collapsed, type) => {
             console.log(collapsed, type);
           }}
-          style={{ backgroundColor: colorBgContainer, height: "100%" }}
+          style={{ backgroundColor: colorBgContainer, height: '100%' }}
         >
-          <div className='logo' />
+          <div className="logo" />
           <Row
             style={{
               fontWeight: 700,
-              display: "flex",
-              justifyContent: "center",
+              display: 'flex',
+              justifyContent: 'center',
             }}
           >
             PCGO
           </Row>
           <Menu
-            theme='light'
-            defaultSelectedKeys={["1"]}
-            mode='inline'
+            theme="light"
+            defaultSelectedKeys={['1']}
+            mode="inline"
             items={itemsMenu}
             onSelect={rotas}
-            style={{ height: "83.5%" }}
+            style={{ height: '83.5%' }}
           />
           <Footer>
             <Row
               style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                flexDirection: "column",
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                flexDirection: 'column',
                 marginTop: -15,
               }}
             >
-              <Tooltip title='Divisão de Inovação e Tecnologia da Policia Civil do Estado de Goiás'>
+              <Tooltip title="Divisão de Inovação e Tecnologia da Policia Civil do Estado de Goiás">
                 <Row
                   style={{
                     fontSize: 18,
                     fontWeight: 700,
-                    display: "flex",
-                    justifyContent: "center",
+                    display: 'flex',
+                    justifyContent: 'center',
                   }}
                 >
                   DIT
@@ -805,8 +805,8 @@ const Sistema: React.FC = () => {
                 style={{
                   fontSize: 12,
                   fontWeight: 300,
-                  display: "flex",
-                  justifyContent: "center",
+                  display: 'flex',
+                  justifyContent: 'center',
                 }}
               >
                 {sistemaVersao}
@@ -814,21 +814,21 @@ const Sistema: React.FC = () => {
             </Row>
           </Footer>
         </Sider>
-        <Layout className='site-layout'>
+        <Layout className="site-layout">
           <Header
             style={{
               padding: 5,
               background: colorBgContainer,
-              borderRadius: "0px 0px 10px 10px",
+              borderRadius: '0px 0px 10px 10px',
               marginInline: 5,
             }}
           >
             <Row
               style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "left",
-                alignItems: "center",
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'left',
+                alignItems: 'center',
                 padding: 5,
               }}
             >
@@ -847,7 +847,7 @@ const Sistema: React.FC = () => {
                 <Row
                   style={{
                     fontSize: 14,
-                    color: "#00000080",
+                    color: '#00000080',
                     marginTop: -10,
                   }}
                 >
@@ -858,20 +858,20 @@ const Sistema: React.FC = () => {
                 <Row
                   style={{
                     fontSize: 14,
-                    color: "#00000080",
+                    color: '#00000080',
                     paddingLeft: 15,
                   }}
                 >
                   Unidade&nbsp;
-                  <Popover title='Clique no nome abaixo para trocar de unidade.'>
+                  <Popover title="Clique no nome abaixo para trocar de unidade.">
                     <QuestionCircleFilled />
                   </Popover>
                 </Row>
                 <Row>
                   <Title style={{ fontSize: 18 }}>
                     <Button
-                      style={{ color: "#000000", fontWeight: 600 }}
-                      type='link'
+                      style={{ color: '#000000', fontWeight: 600 }}
+                      type="link"
                       onClick={() => openModalSelectUnidade()}
                     >
                       {unidade?.nome}
@@ -881,53 +881,53 @@ const Sistema: React.FC = () => {
               </Col>
               <Col
                 span={8}
-                style={{ display: "flex", justifyContent: "right" }}
+                style={{ display: 'flex', justifyContent: 'right' }}
               >
                 <Space>
                   <Avatar
                     src={auth?.user?.icon}
-                    style={{ marginRight: 5, marginTop: "-10px" }}
+                    style={{ marginRight: 5, marginTop: '-10px' }}
                   >
                     {auth?.user?.nome} - {auth?.user?.funcao}
                   </Avatar>
                   <Col>
-                    <Row onClick={() => actionDrawer()} className='click'>
+                    <Row onClick={() => actionDrawer()} className="click">
                       <strong style={{ marginRight: 5 }}>
                         {auth?.user?.nome}
                       </strong>
                     </Row>
                     {visibleSensive ? (
                       <Row>
-                        <Col style={{ fontSize: 12, color: "#00000080" }}>
+                        <Col style={{ fontSize: 12, color: '#00000080' }}>
                           {auth?.user?.cpf} - {auth?.user?.funcao}
                         </Col>
                         <Col style={{ marginTop: -2, paddingLeft: 5 }}>
                           <EyeInvisibleOutlined
                             onClick={() => setVisibleSensive(!visibleSensive)}
-                            className='click'
+                            className="click"
                           />
                         </Col>
                       </Row>
                     ) : (
                       <Row>
-                        <Col style={{ fontSize: 12, color: "#00000080" }}>
+                        <Col style={{ fontSize: 12, color: '#00000080' }}>
                           *********** - ****************
                         </Col>
                         <Col style={{ marginTop: -2, paddingLeft: 5 }}>
                           <EyeOutlined
                             onClick={() => setVisibleSensive(!visibleSensive)}
-                            className='click'
+                            className="click"
                           />
                         </Col>
                       </Row>
                     )}
                   </Col>
                   <Button
-                    shape='circle'
+                    shape="circle"
                     icon={
                       <PoweroffOutlined
-                        style={{ color: "red" }}
-                        title={"Sair"}
+                        style={{ color: 'red' }}
+                        title={'Sair'}
                       />
                     }
                     onClick={auth?.logoutSSO}
@@ -936,44 +936,44 @@ const Sistema: React.FC = () => {
               </Col>
             </Row>
           </Header>
-          <Content style={{ margin: "0 16px" }}>
-            <Breadcrumb style={{ margin: "16px 0", color: " black" }}>
-              <Breadcrumb.Item className='menu'>
+          <Content style={{ margin: '0 16px' }}>
+            <Breadcrumb style={{ margin: '16px 0', color: ' black' }}>
+              <Breadcrumb.Item className="menu">
                 {
                   {
-                    "1": <span>Dashboard</span>,
-                    "2": <span>Teste</span>,
-                    "3": <span>Teste / Teste children</span>,
-                    "4": <span>Objetos</span>,
-                    "5": <span>Naturezas</span>,
-                    "6": <span>Modelos</span>,
+                    '1': <span>Dashboard</span>,
+                    '2': <span>Teste</span>,
+                    '3': <span>Teste / Teste children</span>,
+                    '4': <span>Objetos</span>,
+                    '5': <span>Naturezas</span>,
+                    '6': <span>Modelos</span>,
                   }[chave]
                 }
               </Breadcrumb.Item>
             </Breadcrumb>
             <div
-              className='site-layout-background'
+              className="site-layout-background"
               style={{ padding: 15, minHeight: 360 }}
             >
               <AuthProvider>
                 <>
                   {
                     {
-                      "1": <Dashboard />,
-                      "3": <Teste />,
+                      '1': <Dashboard />,
+                      '3': <Teste />,
                     }[chave]
                   }
                 </>
               </AuthProvider>
             </div>
           </Content>
-          <Footer style={{ textAlign: "center" }}>
+          <Footer style={{ textAlign: 'center' }}>
             {sistemaNameSSO} ©2023 Divisão de Inovação e Tecnologia
           </Footer>
         </Layout>
       </Layout>
       <Modal
-        title={"Escolha uma unidade"}
+        title={'Escolha uma unidade'}
         open={openModalUnidade}
         footer
         width={600}
@@ -982,11 +982,11 @@ const Sistema: React.FC = () => {
         <List>
           {unidades.map((item, index) => {
             return (
-              <List.Item key={index} className='star'>
+              <List.Item key={index} className="star">
                 <Button
-                  type='link'
+                  type="link"
                   onClick={() => setUnidadeClick(item)}
-                  style={{ color: "#000000" }}
+                  style={{ color: '#000000' }}
                 >
                   <StarFilled />
                   {item.nome}
@@ -997,14 +997,14 @@ const Sistema: React.FC = () => {
         </List>
       </Modal>
       <Drawer
-        title='Dados do Usuário'
-        placement='right'
+        title="Dados do Usuário"
+        placement="right"
         onClose={actionDrawer}
         //open={openDrawer}
       >
         <p style={{ fontSize: 18, fontWeight: 700 }}>{auth?.user?.nome}</p>
         <p>
-          {auth?.user?.corporacaoAtual ? auth?.user?.corporacaoAtual.nome : ""}{" "}
+          {auth?.user?.corporacaoAtual ? auth?.user?.corporacaoAtual.nome : ''}{' '}
           - {auth?.user?.funcao}
         </p>
         <Divider>Unidades</Divider>
@@ -1014,7 +1014,6 @@ const Sistema: React.FC = () => {
         <p>Unidades de Trabalho:</p>
         <p>&nbsp;</p>
         {auth?.user?.unidadesDeTrabalho.map((unidade: any) => {
-          // eslint-disable-next-line react/jsx-key
           return <p>- {unidade.unidadeNome}</p>;
         })}
         <Divider>Sistemas</Divider>
