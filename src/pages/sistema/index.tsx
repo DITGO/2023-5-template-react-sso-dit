@@ -700,11 +700,10 @@ const Sistema: React.FC = () => {
         nome: localStorage.getItem("localNome")!,
         codigo: parseInt(localStorage.getItem("localId")!),
       });
-      console.log("achou unidade");
     } else {
-      console.log("nao achou a unidade");
-      localStorage.setItem("localId", unidades[0].codigo.toString());
-      localStorage.setItem("localNome", unidades[0].nome);
+      console.log(unidades[0]);
+      localStorage.setItem("localId", unidades[0].codigo!.toString());
+      localStorage.setItem("localNome", unidades[0].nome!);
       setUnidade(unidades[0]);
     }
   };
