@@ -10,6 +10,7 @@ export const sistemaDescricao = 'Plataforma para gerenciamento de materias.';
 export const sistemaVersao = '1.0.0-00';
 export const domainNameProd = 'gmospc.ssp.go.gov.br';
 export const domainNameHomo = 'gmospc-homo.ssp.go.gov.br';
+
 export const domainNameDesv = 'localhost';
 
 export const perfisSistema = {
