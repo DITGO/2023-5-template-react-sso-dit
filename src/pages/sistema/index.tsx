@@ -556,12 +556,6 @@ export const Sistema = () => {
 
 import {
   PoweroffOutlined,
-  FileTextOutlined,
-  PoundOutlined,
-  GiftOutlined,
-  ReadOutlined,
-  FolderOutlined,
-  ArrowRightOutlined,
   EyeOutlined,
   QuestionCircleFilled,
   EyeInvisibleOutlined,
@@ -936,7 +930,15 @@ const Sistema: React.FC = () => {
               </Col>
             </Row>
           </Header>
-          <Content style={{ margin: '0 16px' }}>
+          <Content
+            style={{
+              margin: '5px',
+              backgroundColor: colorBgContainer,
+              overflowY: 'auto',
+              borderRadius: '10px 10px 0px 0px',
+              padding: 10,
+            }}
+          >
             <Breadcrumb style={{ margin: '16px 0', color: ' black' }}>
               <Breadcrumb.Item className="menu">
                 {
